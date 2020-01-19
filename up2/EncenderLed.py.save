@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+import mraa
+import time
+
+# Use pin 7 by default
+pin_r = 22
+pin_g = 27
+pin_b = 23
+
+# Export the GPIO pin for use
+pin_r = mraa.Gpio(pin_no,owner=False,raw=True)
+pin_gpin_g = mraa.Gpio(pin_no2,owner=False,raw=True)
+ = mraa.Gpio(pin_no2,owner=False,raw=True)
+
+pin.dir(mraa.DIR_OUT)
+pin2.dir(mraa.DIR_OUT)
+
+
+# Small delay to allow udev rules to execute (necessary only on up)
+time.sleep(1)
+
+# Configure the pin direction
+pin.dir(mraa.DIR_OUT)
+pin2.dir(mraa.DIR_OUT)
+
+# Loop
+while True:
+    # Turn the LED on and wait for 1 seconds
+    pin.write(1)
+    print("Encendido")
+    time.sleep(1)
+    # Turn the LED off and wait for 1 seconds
+    pin.write(0)
+    print("Apagado")
+    time.sleep(1)
+
+# Turn the LED on and wait for 1 seconds
+    pin2.write(1)
+    print("Encendido")
+    time.sleep(1)
+    # Turn the LED off and wait for 1 seconds
+    pin2.write(0)
+    print("Apagado")
+    time.sleep(1)
+
+

@@ -1,0 +1,25 @@
+[sudo] password for sbcg4: Version: 1.0.115
+current configuration: id=miguelhry:12bdc76f-20c0-4a09-b8d1-a7d517860c7d
+url=
+http_proxy=
+https_proxy=
+all_proxy=
+authurl=https://hydra.arduino.cc/
+apiurl=https://api2.arduino.cc
+cert_path=./
+sketches_path=
+check_ro_fs=false
+env_vars_to_load=
+
+Generate private key to dump in:  certificate.key
+Generate csr
+Request certificate to dump in:  certificate.pem
+Request mqtt url
+Write conf to  ./arduino-connector.cfg
+Check successful MQTT connection
+setupMQTT certificate.pem certificate.key miguelhry:12bdc76f-20c0-4a09-b8d1-a7d517860c7d a19g5nbe27wn47-ats.iot.us-east-1.amazonaws.com
+WARN: memstore.go:137: [store]    memorystore wiped
+WARN: net.go:318: [net]      logic stopped
+WARN: net.go:328: [net]      errorWatch stopped
+MQTT connection successful
+Setup completed
