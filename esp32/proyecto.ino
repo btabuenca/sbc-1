@@ -1,8 +1,8 @@
 #include "ThingsBoard.h"
 #include "WiFi.h"
 
-#define WIFI_AP             "RODOLFO_Fmhh"
-#define WIFI_PASSWORD       "uxsbhmwawf77"
+#define WIFI_AP             "SBC"
+#define WIFI_PASSWORD       "sbc$18-maceta"
 
 // See https://thingsboard.io/docs/getting-started-guides/helloworld/
 // to understand how to obtain an access token
