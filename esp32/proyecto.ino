@@ -6,7 +6,7 @@
 
 // See https://thingsboard.io/docs/getting-started-guides/helloworld/
 // to understand how to obtain an access token
-#define TOKEN               "nlaEI1B3qtGoqOG8k4fM"
+#define TOKEN               "cIJQDpi21oDem3gnDDdz"
 #define THINGSBOARD_SERVER  "demo.thingsboard.io"
 
 // Baud rate for debug serial
@@ -63,12 +63,15 @@ void sensores(){
 
   peso = analogRead(PESO);
   peso = 8*(peso - 228);
+  Serial.println(" ");
+  Serial.println(" ");
+
   Serial.print(peso);
   Serial.println("gramos");
 
 
-  //Serial.print("Humedad del suelo: ");
-  //Serial.println(analogRead(SENSOR_AGUA));  
+  Serial.print("Humedad desbordamiento: ");
+  Serial.println(analogRead(SENSOR_AGUA));  
 
   if(analogRead(SENSOR_AGUA) < 300)
   {
@@ -87,7 +90,7 @@ void sensores(){
 void actuadores(){
 
 
-  if(ilum < 500)
+  if(ilum < 1500)
   {
     digitalWrite(ROJO, HIGH); 
     digitalWrite(VERDE, HIGH);
@@ -105,15 +108,15 @@ void actuadores(){
    Serial.print("Humedad del suelo: ");
    Serial.println(humedad);
   
-  if(humedad > 2500 || analogRead(SENSOR_AGUA) > 300)
+  if(humedad > 2500 && analogRead(SENSOR_AGUA) > 1000)
    {
     Serial.println("Regando");  
-    digitalWrite(5, HIGH);   // turn the LED on (HIGH is the voltage level)
+    digitalWrite(RELE, HIGH);   // turn the LED on (HIGH is the voltage level)
    }
-   else
+   else 
    {
     Serial.println("Cortando riego");  
-    digitalWrite(5, LOW);   // turn the LED on (HIGH is the voltage level)
+    digitalWrite(RELE, LOW);   // turn the LED on (HIGH is the voltage level)
    }
   
 }
@@ -123,28 +126,43 @@ void loop() {
   sensores();
   actuadores();
 
-  delay(10000);
+  delay(1000);
 
+/*
 
+  // Reconnect to ThingsBoard, if needed
+  if (!tb.connected()) {
 
-  Serial.println("Sending data...");
+    // Connect to the ThingsBoard
+    Serial.print("Connecting to: ");
+    Serial.print(THINGSBOARD_SERVER);
+    Serial.print(" with token ");
+    Serial.println(TOKEN);
+    if (!tb.connect(THINGSBOARD_SERVER, TOKEN)) {
+      Serial.println("Failed to connect");
+      return;
+    }
+  }
 
-  // Uploads new telemetry to ThingsBoard using MQTT.
-  // See https://thingsboard.io/docs/reference/mqtt-api/#telemetry-upload-api
-  // for more details
-
-  tb.sendTelemetryInt("ldr", 22);
-
-  tb.loop();
 
 
   
 
+  // Check if it is a time to send DHT22 temperature and humidity
+    Serial.println("Sending data...");
+
+    // Uploads new telemetry to ThingsBoard using MQTT. 
+    // See https://thingsboard.io/docs/reference/mqtt-api/#telemetry-upload-api 
+    // for more details
+
+      tb.sendTelemetryInt("ldr", ilum);
+    
 
   
 
+  // Process messages
+  tb.loop();*/
 }
-
 
 void InitWiFi()
 {
@@ -171,4 +189,3 @@ void reconnect() {
     Serial.println("Connected to AP");
   }
 }
-  
